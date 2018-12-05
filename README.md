@@ -4,11 +4,15 @@
 
 ## Build Setup
 
+## 使用方法：在chatstyle-admin目录下打开命令行，在命令行中输入以下代码
+
 ``` bash
-# install dependencies
+# install dependencies 
+# 安装依赖包
 npm install
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at localhost:8080 
+# 在浏览器中打开localhost:8080
 npm run dev
 
 # build for production with minification
