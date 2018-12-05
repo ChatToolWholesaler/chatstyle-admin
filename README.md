@@ -2,7 +2,6 @@
 
 > A Vue.js project
 
-## Build Setup
 
 ## 使用方法：在chatstyle-admin目录下打开命令行，在命令行中输入以下代码
 
