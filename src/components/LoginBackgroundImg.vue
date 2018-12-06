@@ -16,5 +16,6 @@ export default {
   height: 100%;
   position: absolute;
   z-index: -1000;
+  left: 0px;
 }
 </style>
