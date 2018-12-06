@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import NavigationBar from '@/components/NavigationBar'
-import LoginBox from '@/components/LoginBox'
+import LoginNavigationBar from '@/components/LoginNavigationBar'
+import LoginBackgroundImg from '@/components/LoginBackgroundImg'
 
 Vue.use(Router)
 
@@ -11,15 +10,8 @@ export default new Router({
     {
       path: '/',
       components: {
-        default: HelloWorld,
-        a: HelloWorld,
-        b: NavigationBar
-      }
-    },
-    {
-      path: '/login',
-      components: {
-        default: LoginBox
+        default: LoginNavigationBar,
+        back: LoginBackgroundImg
       }
     }
   ]
