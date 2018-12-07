@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="../assets/back.jpg" class="LoginBackgroundImg" />
+    <img src="../assets/LoginPage/back.jpg" class="LoginBackgroundImg" />
   </div>
 </template>
 
