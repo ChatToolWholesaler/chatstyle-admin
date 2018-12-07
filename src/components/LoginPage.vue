@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="LoginPage">
     <login-background-img></login-background-img>
     <login-navigation-bar></login-navigation-bar>
     <div class="LoginBoxPosition">
@@ -23,9 +23,12 @@ export default {
 </script>
 
 <style scoped>
+.LoginPage{
+}
 .LoginBoxPosition{
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 90vh;
 }
 </style>
