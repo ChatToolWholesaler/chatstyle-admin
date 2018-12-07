@@ -3,13 +3,13 @@
     <h1 class="LoginBoxHeader">登陆</h1>
     <div class="InputBox">
       <img class="InputIcon" src="../assets/LoginPage/username.png" />
-      <input placeholder="用户名" type="text" class="Input" />
+      <input placeholder="用户名" type="text" class="Input" required />
     </div>
     <div class="InputBox">
       <img class="InputIcon" src="../assets/LoginPage/password.png" />
-      <input placeholder="密码" type="password" class="Input" />
+      <input placeholder="密码" type="password" class="Input" required />
     </div>
-    <button class="LoginButton">确认登陆</button>
+    <router-link to="/home"><button class="LoginButton" >确认登陆</button></router-link>
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
 <style scoped>
 .LoginBox{
   width: 400px;
-  height: 400px;
+  height: 380px;
   background: rgba(255,255,255,0.8);
 }
 .LoginBoxHeader{
@@ -35,29 +35,39 @@ export default {
   width: 76%;
   height: 10%;
   margin-top: 10%;
-  margin-left: 10%;
+  margin-left: 12%;
   margin-right: 10%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
+
 .Input{
   width: 100%;
   height: 100%;
   background-color: white;
   border-style: none;
   padding: 0 2%;
+  outline-color: #949494;
 }
+
 .LoginButton{
   width: 40%;
   height: 10%;
   float: right;
-  margin-right: 10%;
+  margin-right: 12%;
   margin-top: 12%;
   background-color: #949494;
   color: white;
   border-style: none;
 }
+.LoginButton:hover{
+  cursor: pointer;
+}
 .InputIcon{
   width: 20px;
   height: 20px;
   position: absolute;
+  padding-right: 10px;
 }
 </style>
