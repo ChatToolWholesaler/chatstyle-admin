@@ -22,7 +22,7 @@ export default {
   },
   data () {
     return {
-      selected: '1'
+      selected: ''
     }
   },
   computed: {
@@ -40,6 +40,7 @@ export default {
     }
   },
   beforeCreate () {
+    this.selected = 1
     this.$emit('selectByButton', this.selected)
   }
 }
