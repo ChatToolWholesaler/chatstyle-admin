@@ -6,9 +6,9 @@
       <div class="userTag">{{ userTag }}</div>
     </div>
     <div class="buttonList">
-      <home-navigation-bar-left-button button-name="用户列表"/>
-      <home-navigation-bar-left-button button-name="公告列表"/>
-      <home-navigation-bar-left-button button-name="房间列表"/>
+      <home-navigation-bar-left-button button-name="用户列表" :isSelected="selected===1" @click.native="select(1)"/>
+      <home-navigation-bar-left-button button-name="公告列表" :isSelected="selected===2" @click.native="select(2)"/>
+      <home-navigation-bar-left-button button-name="房间列表" :isSelected="selected===3" @click.native="select(3)"/>
     </div>
   </div>
 </template>
@@ -20,6 +20,11 @@ export default {
   components: {
     HomeNavigationBarLeftButton
   },
+  data () {
+    return {
+      selected: '1'
+    }
+  },
   computed: {
     username () {
       return '吴彦祖'
@@ -27,6 +32,15 @@ export default {
     userTag () {
       return '管理员'
     }
+  },
+  methods: {
+    select (id) {
+      this.selected = id
+      this.$emit('selectByButton', this.selected)
+    }
+  },
+  beforeCreate () {
+    this.$emit('selectByButton', this.selected)
   }
 }
 </script>
@@ -35,12 +49,12 @@ export default {
 .homeNavigationBarLeft{
   width: 200px;
   height: 100%;
+  min-width: 200px;
   background-color: #333;
-  position: fixed;
 }
 .userBox{
-  margin-top: 50px;
-  margin-bottom: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 .avatar{
   background-color: white;
@@ -62,7 +76,7 @@ export default {
   margin-top: 5px;
 }
 .buttonList{
-  margin-top: 30px;
-  margin-bottom: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 </style>
