@@ -51,7 +51,7 @@ export default {
   width: 200px;
   height: 100%;
   min-width: 200px;
-  background-color: #333;
+  background-color: #434343;
 }
 .userBox{
   padding-top: 50px;
