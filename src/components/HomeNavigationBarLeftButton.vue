@@ -1,7 +1,7 @@
 <template>
   <div class="buttonBox">
-    <!-- <div :class="{ a: isActive,  b: !isActive }"></div> -->
-    <div class="button" :class="{ selectedButton: isSelected }">{{ buttonName }}</div>
+    <div id="buttonLabel" class="buttonLabel" :class="{ selectedButtonLabel: isSelected}"></div>
+    <div id="button" class="button" :class="{ selectedButton: isSelected }">{{ buttonName }}</div>
   </div>
 </template>
 
@@ -18,22 +18,31 @@ export default {
   width: 100%;
   height: 50px;
 }
-.button:hover{
+.buttonBox:hover{
   background-color: #666;
 }
 .selectedButton{
+  background-color: #333;
+}
+.selectedButtonLabel{
   background-color: #0063b1;
 }
 .button{
-  width: 100%;
+  width: 95%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   user-select: none;
+  float: left;
 }
-.button:active{
+.buttonBox:active{
   background-color: #0063b1;
+}
+.buttonLabel{
+  width: 5%;
+  height: 100%;
+  float: left;
 }
 </style>
