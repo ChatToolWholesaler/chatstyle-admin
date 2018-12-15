@@ -23,8 +23,6 @@ export default {
 </script>
 
 <style scoped>
-.LoginPage{
-}
 .LoginBoxPosition{
   display: flex;
   justify-content: center;

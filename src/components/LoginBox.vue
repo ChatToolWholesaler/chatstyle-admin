@@ -3,20 +3,33 @@
     <h1 class="LoginBoxHeader">登陆</h1>
     <div class="InputBox">
       <img class="InputIcon" src="../assets/LoginPage/username.png" />
-      <input placeholder="用户名" type="text" class="Input" required />
+      <input v-model="username" placeholder="用户名" type="text" class="Input" required />
     </div>
     <div class="InputBox">
       <img class="InputIcon" src="../assets/LoginPage/password.png" />
-      <input placeholder="密码" type="password" class="Input" required />
+      <input v-model="password" placeholder="密码" type="password" class="Input" required />
     </div>
-    <router-link to="/home"><button class="LoginButton" >确认登陆</button></router-link>
+    <router-link to="/home">
+      <button class="LoginButton" @click="login()">确认登陆</button>
+    </router-link>
   </div>
 </template>
 
 <script src="./iconfont.js"></script>
 <script>
 export default {
-  name: 'LoginBox'
+  name: 'LoginBox',
+  data () {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    login () {
+      console.log("尝试登陆")
+    }
+  }
 }
 </script>
 
