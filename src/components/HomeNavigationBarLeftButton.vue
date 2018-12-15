@@ -28,7 +28,7 @@ export default {
   background-color: #0063b1;
 }
 .button{
-  width: 95%;
+  width: 96%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -41,7 +41,7 @@ export default {
   background-color: #0063b1;
 }
 .buttonLabel{
-  width: 5%;
+  width: 4%;
   height: 100%;
   float: left;
 }

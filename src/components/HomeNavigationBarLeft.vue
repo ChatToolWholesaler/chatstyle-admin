@@ -39,7 +39,7 @@ export default {
       this.$emit('selectByButton', this.selected)
     }
   },
-  beforeCreate () {
+  beforeMount () {
     this.selected = 1
     this.$emit('selectByButton', this.selected)
   }
@@ -68,6 +68,7 @@ export default {
   width: 100%;
   height: fit-content;
   font-size: 30px;
+  user-select: none;
 }
 .userTag{
   color:white;
@@ -75,6 +76,7 @@ export default {
   height: fit-content;
   font-size: 15px;
   margin-top: 5px;
+  user-select: none;
 }
 .buttonList{
   padding-top: 30px;
