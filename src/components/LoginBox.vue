@@ -1,16 +1,16 @@
 <template>
-  <div class="LoginBox">
-    <h1 class="LoginBoxHeader">登陆</h1>
-    <div class="InputBox">
-      <img class="InputIcon" src="../assets/LoginPage/username.png" />
-      <input v-model="username" placeholder="用户名" type="text" class="Input" required />
+  <div class="loginBox">
+    <h1 class="loginBoxHeader">登陆</h1>
+    <div class="inputBox">
+      <img class="inputIcon" src="../assets/LoginPage/username.png" />
+      <input v-model="username" placeholder="用户名" type="text" class="input" required />
     </div>
-    <div class="InputBox">
-      <img class="InputIcon" src="../assets/LoginPage/password.png" />
-      <input v-model="password" placeholder="密码" type="password" class="Input" required />
+    <div class="inputBox">
+      <img class="inputIcon" src="../assets/LoginPage/password.png" />
+      <input v-model="password" placeholder="密码" type="password" class="input inputPassword" required />
     </div>
     <router-link to="/home">
-      <button class="LoginButton" @click="login()">确认登陆</button>
+      <button class="loginButton" @click="login()">确认登陆</button>
     </router-link>
   </div>
 </template>
@@ -34,17 +34,18 @@ export default {
 </script>
 
 <style scoped>
-.LoginBox{
+.loginBox{
   width: 400px;
   height: 380px;
   background: rgba(255,255,255,0.8);
 }
-.LoginBoxHeader{
+.loginBoxHeader{
   margin-top: 10%;
-  margin-left: 10%;
+  margin-left: 15%;
   text-align: left;
+  user-select: none;
 }
-.InputBox{
+.inputBox{
   width: 76%;
   height: 10%;
   margin-top: 10%;
@@ -54,8 +55,7 @@ export default {
   justify-content: flex-end;
   align-items: center;
 }
-
-.Input{
+.input{
   width: 100%;
   height: 100%;
   background-color: white;
@@ -64,7 +64,7 @@ export default {
   outline-color: #949494;
 }
 
-.LoginButton{
+.loginButton{
   width: 40%;
   height: 10%;
   float: right;
@@ -74,13 +74,16 @@ export default {
   color: white;
   border-style: none;
 }
-.LoginButton:hover{
+.loginButton:hover{
   cursor: pointer;
 }
-.InputIcon{
+.inputIcon{
   width: 20px;
   height: 20px;
   position: absolute;
   padding-right: 10px;
+}
+.inputPassword{
+  user-select: none;
 }
 </style>
