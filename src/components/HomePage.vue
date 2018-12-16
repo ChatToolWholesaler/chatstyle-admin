@@ -3,7 +3,7 @@
     <home-navigation-bar-top></home-navigation-bar-top>
     <div class="down">
       <home-navigation-bar-left v-on:selectByButton="selectByButton"></home-navigation-bar-left>
-      <component :is="getComponent"></component>
+      <component :is="getComponent" v-on:selectByButton="selectByButton"></component>
     </div>
   </div>
 </template>
@@ -13,7 +13,8 @@ import HomeNavigationBarTop from '@/components/HomeNavigationBarTop'
 import HomeNavigationBarLeft from '@/components/HomeNavigationBarLeft'
 import UserPage from '@/components/UserPage'
 import AnnouncementPage from '@/components/AnnouncementPage'
-import ScenesPage from '@/components/ScenesPage'
+import RoomPage from '@/components/RoomPage'
+import NewAnnouncementPage from '@/components/NewAnnouncementPage'
 export default {
   name: 'HomePage',
   data () {
@@ -26,7 +27,8 @@ export default {
     HomeNavigationBarLeft,
     UserPage,
     AnnouncementPage,
-    ScenesPage
+    RoomPage,
+    NewAnnouncementPage
   },
   computed: {
     getComponent: function () {
@@ -38,7 +40,10 @@ export default {
           return AnnouncementPage
         }
         case 3: {
-          return ScenesPage
+          return RoomPage
+        }
+        case 4: {
+          return NewAnnouncementPage
         }
       }
     }
