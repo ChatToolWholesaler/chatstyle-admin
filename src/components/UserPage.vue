@@ -94,6 +94,9 @@ export default {
   width: 110px;
   height: 40px;
   background-color: #0063b1;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #0063b1;
   float: right;
   color: white;
   font-size: 15px;
@@ -101,6 +104,11 @@ export default {
   justify-content: center;
   align-items: center;
   font-family: "Microsoft JhengHei";
+  cursor: pointer;
+}
+.titleButton:hover{
+  background-color: #3f90ce;
+  border-color: #aad6f8;
 }
 .userListLabelBox{
   height: 50px;
