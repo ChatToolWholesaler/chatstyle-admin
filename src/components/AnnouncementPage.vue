@@ -1,7 +1,10 @@
 <template>
   <div class="announcementPage">
     <div class="announcementStatisticBox">
-      <h1 class="header">公共统计</h1>
+      <h1 class="header">
+        <div class="title">公共统计</div>
+        <div class="titleButton" @click="select()">发新公告</div>
+      </h1>
       <statistic statistic-name="总公告数"></statistic>
       <statistic class="statisticMargin" statistic-name="已删除公告数"></statistic>
     </div>
@@ -9,7 +12,6 @@
       <div class="header">
         <div class="title">历史公告</div>
         <div class="titleButton">删除公告</div>
-        <div class="titleButton">发新公告</div>
       </div>
       <div class="announcementListLabelBox">
         <div class="announcementListLabel checkboxLabel"><input class="checkbox" type="checkbox"></div>
@@ -39,6 +41,11 @@ export default {
   components: {
     Statistic,
     Paging
+  },
+  methods: {
+    select () {
+      this.$emit('selectByButton', 4)
+    }
   }
 }
 </script>
@@ -96,6 +103,9 @@ export default {
   width: 110px;
   height: 40px;
   background-color: #0063b1;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #0063b1;
   float: right;
   color: white;
   font-size: 15px;
@@ -103,6 +113,11 @@ export default {
   justify-content: center;
   align-items: center;
   font-family: "Microsoft JhengHei";
+  cursor: pointer;
+}
+.titleButton:hover{
+  background-color: #3f90ce;
+  border-color: #aad6f8;
 }
 .announcementListLabelBox{
   height: 50px;
