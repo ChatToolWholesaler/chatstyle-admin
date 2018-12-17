@@ -3,7 +3,7 @@
     <login-background-img></login-background-img>
     <login-navigation-bar></login-navigation-bar>
     <div class="LoginBoxPosition">
-      <login-box></login-box>
+      <login-box v-on:linkPath="linkPath"></login-box>
     </div>
   </div>
 </template>
@@ -18,6 +18,11 @@ export default {
     LoginNavigationBar,
     LoginBackgroundImg,
     LoginBox
+  },
+  methods: {
+    linkPath: function (p) {
+      this.$router.push({path: p})
+    }
   }
 }
 </script>
