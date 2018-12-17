@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     selectByButton: function (selectedID) {
-      console.log(selectedID)
+      // console.log(selectedID)// 要跳转的页面编码
       this.selectedID = selectedID
     }
   }
