@@ -36,7 +36,7 @@ export default {
       var storage = window.localStorage
       storage.adminname = this.adminname
       const axios = require('axios')
-      axios.post('http://localhost:3000/api/v1/admin/login',{
+      axios.post('http://192.168.1.124/api/v1/admin/login',{
         adminname: this.adminname,
         password: this.password
       })

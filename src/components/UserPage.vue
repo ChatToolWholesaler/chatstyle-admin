@@ -45,7 +45,7 @@ export default {
   },
   data () {
     return {
-      totalUserNumber: 1,
+      totalUserNumber: 0,
       onlineUserNumber: 0,
       responseData: null
     }
@@ -58,12 +58,12 @@ export default {
   mounted () {
     var _this = this
     const axios = require('axios')
-    axios.post('http://localhost:3000/api/v1/admin/user/getStatistics'
+    axios.post('http://192.168.1.124:3000/api/v1/admin/user/getStatistics'
     ).then(function (response) {
       _this.totalUserNumber = response.data.data.totalUserNumber
       _this.onlineUserNumber = response.data.data.onlineUserNumber
     })
-    axios.post('http://localhost:3000/api/v1/admin/user/getUserList'
+    axios.post('http://192.168.1.124:3000/api/v1/admin/user/getUserList'
     ).then(function (response) {
       _this.responseData = response.data.data
     })
