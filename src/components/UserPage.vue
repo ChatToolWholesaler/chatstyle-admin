@@ -2,10 +2,8 @@
   <div class="userPage">
     <div class="userStatisticBox">
       <h1 class="header">用户统计</h1>
-      <statistic statistic-name="总用户数"></statistic>
-      <statistic class="statisticMargin" statistic-name="当前在线人数"></statistic>
-      <statistic statistic-name="日活跃用户"></statistic>
-      <statistic statistic-name="月活跃用户"></statistic>
+      <statistic statistic-name="总用户数" :statistic-value="totalUserNumber"></statistic>
+      <statistic class="statisticMargin" statistic-name="当前在线人数" :statistic-value="onlineUserNumber"></statistic>
     </div>
     <div class="userListBox">
       <div class="header">
@@ -18,11 +16,18 @@
       <div class="userListLabelBox">
         <div class="userListLabel checkboxLabel"><input class="checkbox" type="checkbox"></div>
         <div class="userListLabel usernameLabel">用户名</div>
-        <div class="userListLabel roleLabel">角色</div>
-        <div class="userListLabel stateLabel">状态</div>
+        <div class="userListLabel isOnlineLabel">是否在线</div>
         <div class="userListLabel isBannedLabel">是否被封禁</div>
-        <div class="userListLabel totalOnlineTimeLabel">累积在线时间</div>
+        <div class="userListLabel createTimeLabel">注册时间</div>
         <div class="userListLabel lastOnlineTimeLabel">上次在线时间</div>
+      </div>
+      <div class="userListLabelBox" v-for="(res, index) in responseData" :key="index">
+        <div class="userListLabel checkboxLabel userListLabelBackColor"><input :id="index" class="checkbox" type="checkbox"></div>
+        <div class="userListLabel usernameLabel userListLabelBackColor">{{ res.username }}</div>
+        <div class="userListLabel isOnlineLabel userListLabelBackColor">{{ res.isOnline }}</div>
+        <div class="userListLabel isBannedLabel userListLabelBackColor">{{ res.isBanned }}</div>
+        <div class="userListLabel createTimeLabel userListLabelBackColor">{{ res.createTime }}</div>
+        <div class="userListLabel lastOnlineTimeLabel userListLabelBackColor">{{ res.lastOnlineTime }}</div>
       </div>
       <paging></paging>
     </div>
@@ -37,6 +42,31 @@ export default {
   components: {
     Statistic,
     Paging
+  },
+  data () {
+    return {
+      totalUserNumber: 1,
+      onlineUserNumber: 0,
+      responseData: null
+    }
+  },
+  methods: {
+    createUserList: function (response) {
+      console.log(response.data.data)
+    }
+  },
+  mounted () {
+    var _this = this
+    const axios = require('axios')
+    axios.post('http://localhost:3000/api/v1/admin/user/getStatistics'
+    ).then(function (response) {
+      _this.totalUserNumber = response.data.data.totalUserNumber
+      _this.onlineUserNumber = response.data.data.onlineUserNumber
+    })
+    axios.post('http://localhost:3000/api/v1/admin/user/getUserList'
+    ).then(function (response) {
+      _this.responseData = response.data.data
+    })
   }
 }
 </script>
@@ -111,7 +141,7 @@ export default {
   border-color: #aad6f8;
 }
 .userListLabelBox{
-  height: 50px;
+  height: fit-content;
   width: 100%;
   display: flex;
 }
@@ -133,21 +163,21 @@ export default {
   height: 15px;
 }
 .usernameLabel{
-  width: 20%;
+  width: 25%;
 }
-.roleLabel{
-  width: 12%;
-}
-.stateLabel{
+.isOnlineLabel{
   width: 10%;
 }
 .isBannedLabel{
   width: 10%;
 }
-.totalOnlineTimeLabel{
-  width: 20%;
+.createTimeLabel{
+  width: 25%;
 }
 .lastOnlineTimeLabel{
-  width: 20%;
+  width: 25%;
+}
+.userListLabelBackColor{
+  background-color: white;
 }
 </style>
