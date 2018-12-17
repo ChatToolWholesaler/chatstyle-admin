@@ -1,8 +1,8 @@
 <template>
   <div class="homeNavigationBarLeft">
     <div class="userBox">
-      <img id="Avatar" class="avatar"/>
-      <div class="name">{{ username }}</div>
+      <img id="Avatar" class="avatar" src="../assets\avatar.jpg"/>
+      <div class="name">{{ adminname }}</div>
       <div class="userTag">{{ userTag }}</div>
     </div>
     <div class="buttonList">
@@ -22,15 +22,9 @@ export default {
   },
   data () {
     return {
-      selected: ''
-    }
-  },
-  computed: {
-    username () {
-      return '吴彦祖'
-    },
-    userTag () {
-      return '管理员'
+      selected: '',
+      adminname: '',
+      userTag: '管理员'
     }
   },
   methods: {
@@ -42,6 +36,10 @@ export default {
   beforeMount () {
     this.selected = 1
     this.$emit('selectByButton', this.selected)
+  },
+  mounted () {
+    var storage = window.localStorage
+    this.adminname = storage.adminname
   }
 }
 </script>
