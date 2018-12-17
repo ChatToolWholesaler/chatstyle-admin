@@ -7,7 +7,11 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  beforeDestroy () {
+    var storage = window.localStorage
+    storage.clear()
+  }
 }
 </script>
 
