@@ -3,30 +3,24 @@
     <div class="announcementStatisticBox">
       <h1 class="header">
         <div class="title">公共统计</div>
-        <div class="titleButton" @click="select()">发新公告</div>
       </h1>
-      <statistic statistic-name="总公告数"></statistic>
-      <statistic class="statisticMargin" statistic-name="已删除公告数"></statistic>
+      <statistic statistic-name="总公告数" :statistic-value="totalAnnouncementNumber"></statistic>
     </div>
     <div class="announcementListBox">
       <div class="header">
         <div class="title">历史公告</div>
-        <div class="titleButton">删除公告</div>
+        <div class="titleButton" @click="select()">发新公告</div>
       </div>
       <div class="announcementListLabelBox">
         <div class="announcementListLabel checkboxLabel"><input class="checkbox" type="checkbox"></div>
         <div class="announcementListLabel detailLabel">公告详情</div>
       </div>
-      <paging></paging>
-    </div>
-    <div class="announcementListBox">
-      <div class="header">
-        <div class="title">已删除的公告</div>
-        <div class="titleButton">恢复公告</div>
-      </div>
-      <div class="announcementListLabelBox">
-        <div class="announcementListLabel checkboxLabel"><input class="checkbox" type="checkbox"></div>
-        <div class="announcementListLabel detailLabel">公告详情</div>
+      <div class="announcementListLabelBox" v-for="(res, index) in responseData" :key="index">
+        <div class="announcementListLabel checkboxLabel announcementListLabelBackColor"><input :id="index" class="checkbox" type="checkbox"></div>
+        <div class="announcementListLabel detailLabel announcementListLabelBackColor">
+          <div>标题：{{ res.title }}</div>
+          <div>内容：{{ res.detail }}</div>
+        </div>
       </div>
       <paging></paging>
     </div>
@@ -42,10 +36,28 @@ export default {
     Statistic,
     Paging
   },
+  data () {
+    return {
+      totalAnnouncementNumber: 0,
+      responseData: null
+    }
+  },
   methods: {
     select () {
       this.$emit('selectByButton', 4)
     }
+  },
+  mounted () {
+    var _this = this
+    const axios = require('axios')
+    axios.post('http://192.168.1.124:3000/api/v1/admin/announcement/getStatistics'
+    ).then(function (response) {
+      _this.totalAnnouncementNumber = response.data.data.totalNumb
+    })
+    axios.post('http://192.168.1.124:3000/api/v1/admin/announcement/getHistory'
+    ).then(function (response) {
+      _this.responseData = response.data.data
+    })
   }
 }
 </script>
@@ -143,5 +155,10 @@ export default {
 }
 .detailLabel{
   width: 94%;
+}
+.announcementListLabelBackColor{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
 }
 </style>
