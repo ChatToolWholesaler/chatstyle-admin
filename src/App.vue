@@ -8,9 +8,14 @@
 <script>
 export default {
   name: 'App',
+  methods: {
+    clearLocalStorage: function () {
+      var storage = window.localStorage
+      storage.clear()
+    }
+  },
   beforeDestroy () {
-    var storage = window.localStorage
-    storage.clear()
+    this.clearLocalStorage()
   }
 }
 </script>
