@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="LoginNavigation">
-      <div class="Logo">LOGO</div>
+      <div class="Logo"></div>
     </div>
   </div>
 </template>
@@ -22,9 +22,11 @@ export default {
   align-items: center;
 }
 .Logo{
-  color: white;
-  font-size: 30px;
+  background-size: 130px;
+  width: 130px;
+  height: 35px;
   position: absolute;
-  left: 7%;
+  left: 100px;
+  background-image: url(../assets/logo.png)
 }
 </style>
