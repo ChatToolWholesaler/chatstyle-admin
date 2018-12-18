@@ -1,15 +1,22 @@
 <template>
   <div>
     <div class="HomeNavigationBarTop">
-      <div class="Logo">LOGO</div>
-      <div class="logout"></div>
+      <div class="Logo"></div>
+      <div class="logout" @click="logout()"></div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HomeNavigationBarTop'
+  name: 'HomeNavigationBarTop',
+  methods: {
+    logout: function () {
+      var storage = window.localStorage
+      storage.clear()
+      this.$router.push({path: '/'})
+    }
+  }
 }
 </script>
 
@@ -23,10 +30,12 @@ export default {
   align-items: center;
 }
 .Logo{
-  color: white;
-  font-size: 30px;
+  background-size: 120px;
+  width: 120px;
+  height: 30px;
   position: absolute;
-  left: 55px;
+  left: 45px;
+  background-image: url(../assets/logo.png)
 }
 .logout{
   width: 30px;
