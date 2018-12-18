@@ -58,6 +58,11 @@ export default {
         }
       })
     }
+  },
+  beforeMount () {
+    if (localStorage.getItem('adminname') != null) {
+      this.$router.push({path: '/home'})
+    }
   }
 }
 </script>
