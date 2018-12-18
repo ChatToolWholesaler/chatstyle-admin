@@ -3,17 +3,46 @@
     <div class="newAnnouncementBox">
       <h1 class="header">新公告</h1>
       <div class="title">标题:</div>
-      <textarea class="input" required></textarea>
+      <textarea maxlength="20" v-model="title" class="input" required></textarea>
       <div class="title">内容</div>
-      <textarea class="input detail"></textarea>
-      <div class="button">确认发布</div>
+      <textarea v-model="detail" class="input detail"></textarea>
+      <div :class="{ buttonBackColor: isFailed }" class="button" @click="sendNewAnnoucement()">确认发布</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'NewAnnouncementPage'
+  name: 'NewAnnouncementPage',
+  data () {
+    return {
+      title: '',
+      detail: '',
+      isFailed: false
+    }
+  },
+  methods: {
+    sendNewAnnoucement: function () {
+      var _this = this
+      var axios = require('axios')
+      axios.post('http://localhost:3000/api/v1/admin/announcement/publish', {
+        title: _this.title,
+        detail: _this.detail
+      }).then(function (response) {
+        switch (response.data.code) {
+          case 200: {
+            _this.isFailed = false
+            _this.$emit('selectByButton', 2)
+            break
+          }
+          default: {
+            console.log(response.data)
+            _this.isFailed = true
+          }
+        }
+      })
+    }
+  }
 }
 </script>
 
@@ -85,5 +114,13 @@ export default {
 .button:hover{
   background-color: #3f90ce;
   border-color: #aad6f8;
+}
+.buttonBackColor{
+  background-color: red;
+  border-color: red;
+}
+.buttonBackColor:hover{
+  background-color: red;
+  border-color: red;
 }
 </style>
