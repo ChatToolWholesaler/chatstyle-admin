@@ -34,8 +34,7 @@ export default {
     }
   },
   beforeMount () {
-    this.selected = 1
-    this.$emit('selectByButton', this.selected)
+    this.select(1)
   },
   mounted () {
     var storage = window.localStorage
