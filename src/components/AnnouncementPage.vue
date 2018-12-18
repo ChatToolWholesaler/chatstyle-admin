@@ -16,48 +16,55 @@
         <div class="announcementListLabel detailLabel">公告详情</div>
       </div>
       <div class="announcementListLabelBox" v-for="(res, index) in responseData" :key="index">
-        <div class="announcementListLabel checkboxLabel announcementListLabelBackColor"><input :id="index" class="checkbox" type="checkbox"></div>
-        <div class="announcementListLabel detailLabel announcementListLabelBackColor">
-          <div>标题：{{ res.title }}</div>
-          <div>内容：{{ res.detail }}</div>
+        <div class="announcementList checkboxList">
+          <input :id="index" class="checkbox" type="checkbox">
+        </div>
+        <div class="announcementList detailList">
+          <div class="announcementTitle">{{ res.title }}</div>
+          <div class="announcementDetail">{{ res.detail }}</div>
         </div>
       </div>
-      <paging></paging>
     </div>
   </div>
 </template>
 
 <script>
 import Statistic from '@/components/Statistic'
-import Paging from '@/components/Paging'
 export default {
   name: 'AnnouncementPage',
   components: {
-    Statistic,
-    Paging
+    Statistic
   },
   data () {
     return {
-      totalAnnouncementNumber: 0,
+      totalAnnouncementNumber: '未知',
       responseData: null
     }
   },
   methods: {
-    select () {
+    select: function () {
       this.$emit('selectByButton', 4)
+    },
+    getStatistics: function () {
+      var _this = this
+      const axios = require('axios')
+      axios.post('http://localhost:3000/api/v1/admin/announcement/getStatistics'
+      ).then(function (response) {
+        _this.totalAnnouncementNumber = response.data.data.totalNumb
+      })
+    },
+    createAnnouncementsList: function () {
+      var _this = this
+      const axios = require('axios')
+      axios.post('http://localhost:3000/api/v1/admin/announcement/getHistory'
+      ).then(function (response) {
+        _this.responseData = response.data.data
+      })
     }
   },
   mounted () {
-    var _this = this
-    const axios = require('axios')
-    axios.post('http://192.168.1.124:3000/api/v1/admin/announcement/getStatistics'
-    ).then(function (response) {
-      _this.totalAnnouncementNumber = response.data.data.totalNumb
-    })
-    axios.post('http://192.168.1.124:3000/api/v1/admin/announcement/getHistory'
-    ).then(function (response) {
-      _this.responseData = response.data.data
-    })
+    this.getStatistics()
+    this.createAnnouncementsList()
   }
 }
 </script>
@@ -132,7 +139,7 @@ export default {
   border-color: #aad6f8;
 }
 .announcementListLabelBox{
-  height: 50px;
+  height: fit-content;
   width: 100%;
   display: flex;
 }
@@ -156,9 +163,40 @@ export default {
 .detailLabel{
   width: 94%;
 }
-.announcementListLabelBackColor{
+.announcementList{
+  background-color: #C9C9C9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.15%;
+  margin-right: 0.15%;
+  font-size: 13px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #C9C9C9;
+  padding: 10px 0;
+}
+.checkboxList{
+  width: 5%;
+  background-color: white;
+}
+.detailList{
+  height: fit-content;
+  width: 94%;
   background-color: white;
   display: flex;
   flex-direction: column;
+  text-align: left;
+  overflow: auto;
+}
+.announcementTitle{
+  font-size: 20px;
+  width: 100%;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+.announcementDetail{
+  font-size: 20px;
+  width: 100%;
 }
 </style>
