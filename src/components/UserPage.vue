@@ -29,44 +29,46 @@
         <div class="userListLabel createTimeLabel userListLabelBackColor">{{ res.createTime }}</div>
         <div class="userListLabel lastOnlineTimeLabel userListLabelBackColor">{{ res.lastOnlineTime }}</div>
       </div>
-      <paging></paging>
     </div>
   </div>
 </template>
 
 <script>
 import Statistic from '@/components/Statistic'
-import Paging from '@/components/Paging'
 export default {
   name: 'UserPage',
   components: {
-    Statistic,
-    Paging
+    Statistic
   },
   data () {
     return {
-      totalUserNumber: 0,
-      onlineUserNumber: 0,
+      totalUserNumber: '未知',
+      onlineUserNumber: '未知',
       responseData: null
     }
   },
   methods: {
-    createUserList: function (response) {
-      console.log(response.data.data)
+    getStatistics: function () {
+      var _this = this
+      const axios = require('axios')
+      axios.post('http://localhost:3000/api/v1/admin/user/getStatistics'
+      ).then(function (response) {
+        _this.totalUserNumber = response.data.data.totalUserNumber
+        _this.onlineUserNumber = response.data.data.onlineUserNumber
+      })
+    },
+    createUserList: function () {
+      var _this = this
+      const axios = require('axios')
+      axios.post('http://localhost:3000/api/v1/admin/user/getUserList'
+      ).then(function (response) {
+        _this.responseData = response.data.data
+      })
     }
   },
   mounted () {
-    var _this = this
-    const axios = require('axios')
-    axios.post('http://192.168.1.124:3000/api/v1/admin/user/getStatistics'
-    ).then(function (response) {
-      _this.totalUserNumber = response.data.data.totalUserNumber
-      _this.onlineUserNumber = response.data.data.onlineUserNumber
-    })
-    axios.post('http://192.168.1.124:3000/api/v1/admin/user/getUserList'
-    ).then(function (response) {
-      _this.responseData = response.data.data
-    })
+    this.getStatistics()
+    this.createUserList()
   }
 }
 </script>
