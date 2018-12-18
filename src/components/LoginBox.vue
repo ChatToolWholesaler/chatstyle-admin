@@ -2,7 +2,7 @@
   <div class="loginBox">
     <h1 class="loginBoxHeader">登陆</h1>
     <div class="alertBox">
-      <div class="alertIcon"></div>
+      <div class="alertIcon" ></div>
       <div class="alertDetail">{{ alertMessage }}</div>
     </div>
     <div class="inputBox">
@@ -13,10 +13,7 @@
       <img class="inputIcon" src="../assets/LoginPage/password.png" />
       <input v-model="password" placeholder="密码" type="password" class="input inputPassword" required />
     </div>
-    <!-- 暂时跳转 -->
-    <router-link to="/home">
-      <button class="loginButton" @click="login()">确认登陆</button>
-    </router-link>
+    <button class="loginButton" @click="login()">确认登陆</button>
   </div>
 </template>
 
@@ -26,32 +23,37 @@ export default {
   name: 'LoginBox',
   data () {
     return {
-      adminname: 'root',
-      password: '123456',
-      alertMessage: ' '
+      adminname: '',
+      password: '',
+      alertMessage: ''
     }
   },
   methods: {
     login () {// 请求登陆
+      var _this = this
       var storage = window.localStorage
-      storage.adminname = this.adminname
       const axios = require('axios')
-      axios.post('http://192.168.1.124/api/v1/admin/login',{
+      axios.post('http://localhost:3000/api/v1/admin/login',{
         adminname: this.adminname,
         password: this.password
       })
       .then(function (response) {
         switch (response.data.code) {
-          // case 200: {
-          //   this.$router.push({path: '/home'})
-          //   break
-          // }
-          // case 412:{
-          //   console.log('密码错误')
-          //   break
-          // }
+          case 200: {
+            console.log('登陆成功')
+            _this.alertMessage = ''
+            storage.adminname = _this.adminname
+            _this.$router.push({path: '/home'})
+            break
+          }
+          case 412:{
+            _this.alertMessage = '密码错误!'
+            console.log('密码错误')
+            break
+          }
           default: {
-            // this.$emit('linkPath', '/home')
+            _this.alertMessage = '未知错误!'
+            console.log('未知错误')
           }
         }
       })
