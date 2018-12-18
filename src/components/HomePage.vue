@@ -53,6 +53,11 @@ export default {
       // console.log(selectedID)// 要跳转的页面编码
       this.selectedID = selectedID
     }
+  },
+  beforeMount () {
+    if (localStorage.getItem('adminname') == null) {
+      this.$router.push({path: '/'})
+    }
   }
 }
 </script>
