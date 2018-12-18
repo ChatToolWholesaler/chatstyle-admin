@@ -3,7 +3,7 @@
     <login-background-img></login-background-img>
     <login-navigation-bar></login-navigation-bar>
     <div class="LoginBoxPosition">
-      <login-box v-on:linkPath="linkPath"></login-box>
+      <login-box></login-box>
     </div>
   </div>
 </template>
@@ -20,9 +20,6 @@ export default {
     LoginBox
   },
   methods: {
-    linkPath: function (p) {
-      this.$router.push({path: p})
-    }
   }
 }
 </script>
